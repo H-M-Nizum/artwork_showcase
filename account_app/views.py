@@ -59,3 +59,63 @@ class ArtistProfileView(APIView):
             serializer.save()
             return Response({"message": "Profile partial updated successfully"}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+from rest_framework import generics, permissions
+from .models import ArtworkModel
+from .serializers import ArtworkSerializer
+from rest_framework import permissions
+from rest_framework.views import APIView
+from django.views.decorators.csrf import csrf_exempt
+
+class IsOwnerOrReadOnly(permissions.BasePermission):
+    def has_object_permission(self, request, view, obj):
+        # Read permissions are allowed to any request,
+        # so we'll always allow GET, HEAD or OPTIONS requests.
+        if request.method in permissions.SAFE_METHODS:
+            return True
+
+        # Write permissions are only allowed to the owner of the artwork.
+        return obj.artist == request.user
+
+class ArtworkListCreateAPIView(generics.ListCreateAPIView):
+    queryset = ArtworkModel.objects.all()
+    serializer_class = ArtworkSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(artist=self.request.user)
+
+
+class ArtworkUpdateAPIView(APIView):
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
+
+    @csrf_exempt
+    def put(self, request, pk, format=None):
+        artwork = self.get_object(pk)
+        serializer = ArtworkSerializer(artwork, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @csrf_exempt
+    def patch(self, request, pk, format=None):
+        artwork = self.get_object(pk)
+        serializer = ArtworkSerializer(artwork, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        artwork = self.get_object(pk)
+        artwork.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def get_object(self, pk):
+        try:
+            return ArtworkModel.objects.get(pk=pk)
+        except ArtworkModel.DoesNotExist:
+            raise Http404
+
