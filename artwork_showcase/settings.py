@@ -32,6 +32,7 @@ SECRET_KEY = 'django-insecure-@3_y61ko3%!=0$v%ty)i+^k)7@67!tq3-dc4f2-^3(!c*wi=g0
 DEBUG = True
 
 ALLOWED_HOSTS = []
+AUTH_USER_MODEL = 'account_app.ArtistModel'
 
 
 # Application definition
