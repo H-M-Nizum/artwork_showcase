@@ -1,6 +1,6 @@
 # Local Artwork Showcase
-      This is a Local Artwork Showcase project using g Django, Django REST Framework, PostgreSQL and JWT-based authentication. This application will 
-      serve as a digital platform for local artists to share their artworks, including paintings, digital art, and sculptures, with the community
+This is a Local Artwork Showcase project using g Django, Django REST Framework, PostgreSQL and JWT-based authentication. This application will 
+serve as a digital platform for local artists to share their artworks, including paintings, digital art, and sculptures, with the community
 
 ## To Run this project install this Requirements:
     ```bash
