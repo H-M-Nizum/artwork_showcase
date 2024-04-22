@@ -28,7 +28,7 @@ serve as a digital platform for local artists to share their artworks, including
 - **POST** `/login/`
   - Description: Login an Artist and genarate JWT token.
 - **GET** `/profile/`
-  - Description: Show Artist profile.
+  - Description: Show an Artist profile.
 - **PUT** `/profile/`
   - Description: Update an Artist profile.
 - **PATCH** `/profile/`
@@ -37,18 +37,20 @@ serve as a digital platform for local artists to share their artworks, including
 ### Artwork
     
 - **GET** `/artworks/`
-  - Description: Show a list of all Artwork.
+  - Description: Show a list of all Artworks.
 - **POST** `/artworks/`
     - Description: Create a new Artwok.
+- **GET** `/artworks/{id}/`
+    - Description: Show a specific Artwok.
 - **PUT** `/artworks/{id}/`
-    - Description: Update information of a specific artworks.
+    - Description: Update information of a specific Artwok.
 - **PATCH** `/artworks/{id}/`
-    - Description: Partial update information of a specific artworks.
+    - Description: Partial update information of a specific Artwok.
 - **DELETE** `/artworks/{id}/`
-    - Description: Delete a specific artworks.
+    - Description: Delete a specific Artwok.
 
 ### JWT token
-  - **GET** `/api/token/`
+  - **POST** `/api/token/`
     - Description: Generate JWT token obtain pair.
  - **POST** `/api/token/refresh/`
     - Description: Genarate JWT refresh token.
