@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import ArtistModel, ArtworkModel
+from .models import ArtistModel, ArtworkModel, ReviewModel
 
 class ArtworkSerializer(serializers.ModelSerializer):
     class Meta:
@@ -43,3 +43,10 @@ class ArtistProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = ArtistModel
         fields = ['id', 'username', 'fullname', 'email', 'bio']
+
+# Review serializers
+
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ReviewModel
+        fields = '__all__'

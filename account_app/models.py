@@ -48,3 +48,22 @@ class ArtworkModel(models.Model):
     def __str__(self):
         return self.title
 
+STAR_CHOICE = [
+    ('⭐', '⭐'),
+    ('⭐⭐', '⭐⭐'),
+    ('⭐⭐⭐', '⭐⭐⭐'),
+    ('⭐⭐⭐⭐', '⭐⭐⭐⭐'),
+    ('⭐⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'),
+]
+
+class ReviewModel(models.Model):
+    art = models.ForeignKey(ArtworkModel, on_delete=models.CASCADE)
+    reviewer_name = models.CharField(max_length=100)
+    body = models.TextField()
+    created_time = models.DateTimeField(auto_now_add=True)
+    ratting = models.CharField(max_length=100, choices = STAR_CHOICE)
+
+
+    def __str__(self):
+        return self.reviewer_name
+

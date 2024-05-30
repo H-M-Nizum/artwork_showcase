@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ArtistModel, ArtworkModel
+from .models import ArtistModel, ArtworkModel, ReviewModel
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 # Register your models here.
@@ -36,3 +36,4 @@ class ArtworkAdmin(admin.ModelAdmin):
     list_display = ['id', 'artist', 'title', 'description', 'image_url', 'creation_date']
 # Now register the Artwork
 admin.site.register(ArtworkModel, ArtworkAdmin)
+admin.site.register(ReviewModel)

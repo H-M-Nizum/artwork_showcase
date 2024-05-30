@@ -1,8 +1,8 @@
 from rest_framework.response import Response
 from rest_framework import status, generics, permissions
 from rest_framework.views import APIView
-from .models import ArtistModel, ArtworkModel
-from .serializers import ArtistRegistrationSerializer, ArtistLoginSerializer, ArtistProfileSerializer, ArtworkSerializer
+from .models import ArtistModel, ArtworkModel, ReviewModel
+from .serializers import ArtistRegistrationSerializer, ArtistLoginSerializer, ArtistProfileSerializer, ArtworkSerializer, ReviewSerializer
 from .renderers import UserRenderer
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -130,3 +130,14 @@ class ArtworkUpdateAPIView(APIView):
         except ArtworkModel.DoesNotExist:
             raise Http404
 
+from rest_framework.generics import GenericAPIView
+from rest_framework.mixins import ListModelMixin, CreateModelMixin
+
+class ReviewMixinView(GenericAPIView, ListModelMixin, CreateModelMixin):
+    queryset = ReviewModel.objects.all()
+    serializer_class = ReviewSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)

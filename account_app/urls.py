@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ArtistRegistrationViews, ArtistLoginView, ArtistProfileView, ArtworkListCreateAPIView, ArtworkUpdateAPIView
+from .views import ArtistRegistrationViews, ArtistLoginView, ArtistProfileView, ArtworkListCreateAPIView, ArtworkUpdateAPIView, ReviewMixinView
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -16,4 +16,8 @@ urlpatterns = [
 
     path('artworks/', ArtworkListCreateAPIView.as_view(), name='artwork_list_create'),
     path('artworks/<int:pk>/', ArtworkUpdateAPIView.as_view(), name='artwork_detail_update_delete'),
+
+    path('review/', ReviewMixinView.as_view(), name='review'),
+
+
 ]
