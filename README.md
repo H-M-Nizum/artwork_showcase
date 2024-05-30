@@ -49,6 +49,11 @@ serve as a digital platform for local artists to share their artworks, including
 - **DELETE** `/artworks/{id}/`
     - Description: Delete a specific Artwok.
 
+### Review
+  - **GET** `/review/`
+    - Description: Show a list of all Review.
+ - **POST** `/review/`
+    - Description: Create a new Review.
 ### JWT token
   - **POST** `/api/token/`
     - Description: Generate JWT token obtain pair.
